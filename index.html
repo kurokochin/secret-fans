@@ -11,12 +11,12 @@
       <h1>Secret Fans</h1>
       <div class="input-container">
         <h3>To:</h3>
-        <input type="text" class="message-input" />
+        <input type="text" class="message-input" id="recipient"/>
         <h3>Message:</h3>
-        <textarea placeholder="Dear..." rows="3" class="message-input"></textarea>
+        <textarea placeholder="Dear..." rows="3" class="message-input" id="content"></textarea>
       </div>
       <div class="button-container">
-        <button class="button">Send</button>
+        <button class="button" id="submit-post">Send</button>
       </div>
       <h2>Messages</h2>
       <div class="message-container" id="message-container"></div>
@@ -30,8 +30,21 @@
         dataType: "json",
       })
       .done(function(data) {
-        $.each(data["posts"], function(index, message){
+        $.each(data["posts"], function(index, message) {
           $("#message-container").append("<div class='message-item'><h4>To: " + message.recipient + "</h4><p>"+ message.content +"</p></div>");
+        });
+      });
+      
+      $("#submit-post").click(function() {
+        var recipient = $("#recipient");
+        var content = $("#content");
+        $.ajax({ 
+            url: "http://localhost:8000/post",
+            data: {"content": content.val(), "recipient": recipient.val()},
+            type: "POST",
+            success: function(message) {
+              location.reload();
+            }
         });
       });
     });
