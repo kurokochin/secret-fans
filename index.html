@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <title>Secret Fans</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Secret Fans</h1>
+      <div class="input-container">
+        <h3>To:</h3>
+        <input type="text" class="message-input" />
+        <h3>Message:</h3>
+        <textarea placeholder="Dear..." rows="3" class="message-input"></textarea>
+      </div>
+      <div class="button-container">
+        <button class="button">Send</button>
+      </div>
+      <h2>Messages</h2>
+      <div class="message-container" id="message-container"></div>
+    </div>
+  </body>
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        url: "http://localhost:8000/post",
+        crossDomain: true,
+        dataType: "json",
+      })
+      .done(function(data) {
+        $.each(data["posts"], function(index, message){
+          $("#message-container").append("<div class='message-item'><h4>To: " + message.recipient + "</h4><p>"+ message.content +"</p></div>");
+        });
+      });
+    });
+  </script>
+</html>

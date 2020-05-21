@@ -1,4 +1,5 @@
 from flask import Flask, request
+from flask_cors import CORS
 from flask_restful import Resource, Api
 from flask_restful import reqparse
 from json import dumps
@@ -7,6 +8,7 @@ from sqlalchemy import create_engine
 db_connect = create_engine("sqlite:///secret_fans.db")
 app = Flask(__name__)
 api = Api(app)
+CORS(app, support_credentials=True)
 
 class PostList(Resource):
     def __init__(self):
@@ -19,7 +21,7 @@ class PostList(Resource):
 
     def get(self):
         conn = db_connect.connect() # Connect to database
-        query_result = conn.execute("SELECT rowid, * FROM post_tab;") # This line performs query and returns ResultObject
+        query_result = conn.execute("SELECT rowid, recipient, content FROM post_tab;") # This line performs query and returns ResultObject
         raw_posts = query_result.cursor.fetchall() # Convert ResultObject to list of list
 
         return {"posts": [self._convert_to_beautiful_post(raw_post) for raw_post in raw_posts]}
