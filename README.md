@@ -3,7 +3,7 @@
 ## Requirements
 * Python
 * PIP
-* SQLITE
+* Sqlite3
 
 ## How to setup
 As simple as `python setup.py`
