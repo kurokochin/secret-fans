@@ -25,13 +25,19 @@
   <script>
     $(document).ready(function() {
       $.ajax({
-        url: "http://localhost:8000/post",
+        url: "http://localhost:8000/posts",
         crossDomain: true,
         dataType: "json",
       })
       .done(function(data) {
         $.each(data["posts"], function(index, message) {
-          $("#message-container").append("<div class='message-item'><h4>To: " + message.recipient + "</h4><p>"+ message.content +"</p></div>");
+          $("#message-container").append("<div class='message-item' data-id='" + message.id+ "'><h4>To: " + message.recipient + "</h4><p>"+ message.content +"</p></div>");
+        });
+        $(".message-item").on('click', function(event) {
+          event.preventDefault();
+          var postId = $(this).data("id");
+          window.location.href = "post.html?post_id=" + postId;
+          return false;
         });
       });
       

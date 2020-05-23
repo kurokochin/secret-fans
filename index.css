@@ -94,7 +94,36 @@ p {
   box-sizing: border-box;
 }
 
+.post-container {
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.comment-container {
+  width: 100%;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
 .message-item {
+  width: 100%;
+  background-color: #ffffff;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  display: flex;
+  padding: 8px;
+  margin-top: 12px;
+  font-size: 18px;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+.comment-item {
   width: 100%;
   background-color: #ffffff;
   border: 1px solid #cccccc;
