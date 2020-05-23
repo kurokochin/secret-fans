@@ -45,7 +45,7 @@
         var recipient = $("#recipient");
         var content = $("#content");
         $.ajax({ 
-            url: "http://localhost:8000/post",
+            url: "http://localhost:8000/posts",
             data: {"content": content.val(), "recipient": recipient.val()},
             type: "POST",
             success: function(message) {
